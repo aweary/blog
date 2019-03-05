@@ -1,5 +1,26 @@
+body.light {
+  --bg: #fefefe;
+  --header: #1b0138;
+  --textNormal: #00000;
+  --textLink: #7800d2;
+  /* --hr: hsla(0, 0%, 0%, 0.2); */
+  /* --inlineCode-bg: rgba(255, 229, 100, 0.2); */
+  /* --inlineCode-text: #1a1a1a; */
+}
+
+body.dark {
+  --bg: #0b0010;
+  --header: #ffffff;
+  --textNormal: #fefefe;
+  --textLink: #7800d2;
+  /* --hr: hsla(0, 0%, 0%, 0.2); */
+  /* --inlineCode-bg: rgba(255, 229, 100, 0.2); */
+  /* --inlineCode-text: #1a1a1a; */
+}
+
 body {
-  background-color: #fefefe;
+  background: var(--bg);
+  color: var(--textNormal);
 }
 
  p {
@@ -8,8 +29,12 @@ body {
 }
 
 a {
-  color: #7800d2;
+  color: var(--textLink);
   font-weight: 600;
+}
+
+h1, h2, h3, h4, h5 {
+  color: var(--header);
 }
 
 h2 a {
@@ -20,9 +45,11 @@ h2 a {
 blockquote {
   font-style: italic;
   border-left: 4px solid #2fe8e8;
+  border-radius: 5px;
   padding: 5px;
   margin-left: 0;
-  padding-left: 40px;
+  padding-left: 5%;
+  color: #333;
 }
 
 .thought {
@@ -34,7 +61,22 @@ blockquote {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
+/* 
+.thought::after {
+  display: block;
+  content: "Unfiltered Thought";
+  position: absolute;
+  background: orange;
+  color: white;
+  top: -25px;
+  right: 0px;
+  font-size: 10px;
+  padding: 3px 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+} */
 
 .thought .emoji {
   font-size: 30px;
@@ -46,9 +88,9 @@ blockquote {
 }
 
 .blurb {
-  background-color: lightcyan;
+  background-color: #00ebe833;
   padding: 20px;
-  border: 1px solid cyan;
+  border: 1px solid #2fe8e8;
   border-radius: 5px;
   margin-bottom: 20px;
   display: flex;

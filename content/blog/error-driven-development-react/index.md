@@ -7,15 +7,18 @@ description: ""
 
 ## Fault Tolerence
 
-Building a modern web application is a daunting process involving many moving parts, entropy, and a scary amount of complexity. This means that we often find ourselves in situations where things are breaking.
+Building modern web apps is a complex process involving many moving parts. Sometimes these moving parts don't play well together, which means that they _stop_ moving so well and our things starts breaking. 
 
-While minimizing breakage is a worthwhile pursuit, thinking we can eliminate it all together is unreasonable. That means **our applications need to be resiliant to breakage.**
+While you should do everything you can to prevent these bad things from happening, you should also accept that you'll never be entirely free of it. This means we need to build our apps with the expectation that they will **sometimes break in unexpected ways**.
 
-This means we need [fault tolerence:](https://en.wikipedia.org/wiki/Fault_tolerance)
+In other words, we need [fault tolerence:](https://en.wikipedia.org/wiki/Fault_tolerance)
 
 > Fault tolerance is the property that enables a system to continue operating properly in the event of the failure of some (one or more faults within) of its components. 
 
-In my experience, this is often overlooked in web apps. We spend a lot of time talking about testing and how we can prevent failures, but not nearly as much time accounting for the inevitable faults in our system. For many of us [high availability](https://en.wikipedia.org/wiki/High_availability) is a top priority (if our website is down, our users can't use our product!) and fault tolerence is a critical property of a high availability system.
+
+In my experience this is often overlooked in web apps.
+
+We spend a lot of time talking about testing and how we can prevent failures, but not nearly as much time accounting for the inevitable faults in our system. For many of us [high availability](https://en.wikipedia.org/wiki/High_availability) is a top priority (if our website is down, our users can't use our product!) and fault tolerence is a critical property of a high availability system.
 
 So how do we enable our React application to be fault tolerent?
 
@@ -50,6 +53,8 @@ The React docs do a great job of explaining what error boundaries are and how to
 
 
 ## Failing the Right Way
+
+Adding error boundaries is the easy part. It only takes a few lines of code. The hard part is adding them _in the right places_.
 
 Adding an error boundary to your application is a pretty low-effort win, but it takes a little planning to put them _in the right places_. If you have too few, you risk failures taking down more functionality than is necessary. If you have too many, you risk putting your app into a weird, half-broken state. You want to be the [Goldilocks](https://www.dltk-teach.com/rhymes/goldilocks_story.htm) of failures.
 
@@ -89,7 +94,9 @@ function AddToCartButton(props) {
 }
 ```
 
-This is something that I've started doing with every new component I add and it's been really helpful to see how our applications handle failures. Just make sure you don't commit any of those `throw` statements 🙂
+This is something that I've started doing with every new component I add and it's been really helpful to see how our applications handle failures. Throw an error in the component, in your event handlers, in callbacks--wherever something might fail.
+
+Just make sure you don't commit any of those `throw` statements 🙂
 
 ### Chaos Engineering
 
