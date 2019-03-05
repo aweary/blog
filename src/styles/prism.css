@@ -1,0 +1,235 @@
+body {
+  background-color: #fefefe;
+}
+
+ p {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: #7800d2;
+  font-weight: 600;
+}
+
+h2 a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+blockquote {
+  font-style: italic;
+  border-left: 4px solid #2fe8e8;
+  padding: 5px;
+  margin-left: 0;
+  padding-left: 40px;
+}
+
+.thought {
+  background-color: lightyellow;
+  padding: 20px;
+  border: 1px solid orange;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thought .emoji {
+  font-size: 30px;
+  padding-right: 15px;
+}
+
+.thought p {
+  margin-bottom: 0;
+}
+
+.blurb {
+  background-color: lightcyan;
+  padding: 20px;
+  border: 1px solid cyan;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blurb .emoji {
+  font-size: 30px;
+  padding-right: 15px;
+}
+
+.blurb p {
+  margin-bottom: 0;
+}
+
+
+/**
+ * Based on copypasta from Remy Bach and Sarah Drasner
+ * Stolen from Dan Abramov 
+ * @see https://github.com/gaearon/overreacted.io/blob/master/src/utils/global.css
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: white;
+  background: none;
+  font-family: "IBM Plex Mono", monospace;
+  font-feature-settings: normal;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  margin-bottom: 0;
+  font-size: 1rem;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  overflow: auto;
+  padding: 1.3125rem;
+}
+
+pre[class*="language-"]::-moz-selection {
+  /* Firefox */
+  background: hsl(207, 4%, 16%);
+}
+
+pre[class*="language-"]::selection {
+  /* Safari */
+  background: hsl(207, 4%, 16%);
+}
+
+/* Text Selection colour */
+pre[class*="language-"]::-moz-selection,
+pre[class*="language-"] ::-moz-selection {
+  text-shadow: none;
+  background: hsla(0, 0%, 100%, 0.15);
+}
+
+pre[class*="language-"]::selection,
+pre[class*="language-"] ::selection {
+  text-shadow: none;
+  background: hsla(0, 0%, 100%, 0.15);
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  border-radius: 0.3em;
+  color: #002a4d;
+  background: #efefef;
+  padding: 0.15em 0.2em 0.05em;
+  white-space: normal;
+  font-weight: 500;
+}
+
+.token.attr-name {
+  color: rgb(173, 219, 103);
+  font-style: italic;
+}
+
+.token.comment {
+  color: rgb(128, 147, 147);
+}
+
+.token.string,
+.token.url {
+  color: rgb(173, 219, 103);
+}
+
+.token.variable {
+  color: rgb(214, 222, 235);
+}
+
+.token.number {
+  color: rgb(247, 140, 108);
+}
+
+.token.builtin,
+.token.char,
+.token.constant,
+.token.function {
+  color: rgb(255, 130, 193);
+}
+
+.token.punctuation {
+  color: rgb(199, 146, 234);
+}
+
+.token.selector,
+.token.doctype {
+  color: rgb(199, 146, 234);
+  font-style: "italic";
+}
+
+.token.class-name {
+  color: rgb(255, 203, 139);
+}
+
+.token.operator,
+.token.keyword {
+  color: #2fe8e8;
+}
+.token.tag {
+  color: #ffac14;
+}
+
+.token.boolean {
+  color: rgb(255, 88, 116);
+}
+
+.token.property {
+  color: rgb(128, 203, 196);
+}
+
+.token.namespace {
+  color: rgb(178, 204, 214);
+}
+
+pre[data-line] {
+  padding: 1em 0 1em 3em;
+  position: relative;
+}
+
+.gatsby-highlight-code-line {
+  background-color: hsla(207, 95%, 15%, 1);
+  display: block;
+  margin-right: -1.3125rem;
+  margin-left: -1.3125rem;
+  padding-right: 1em;
+  padding-left: 1.25em;
+  border-left: 0.25em solid #00ece9;
+}
+
+.gatsby-highlight {
+  margin-bottom: 1.75rem;
+  margin-left: -1.3125rem;
+  margin-right: -1.3125rem;
+  border-radius: 10px;
+  background: #0b0010;
+  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+}
+
+@media (max-width: 672px) {
+  .gatsby-highlight {
+    border-radius: 0;
+  }
+}
+
+.gatsby-highlight pre[class*="language-"] {
+  float: left;
+  min-width: 100%;
+}
