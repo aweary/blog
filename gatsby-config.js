@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `react.run`,
+    title: `aweary.dev`,
     author: `Brandon Dail`,
     description: `A blog about React and sometimes other things`,
-    siteUrl: `https://react.run/`,
+    siteUrl: `https://aweary.dev/`,
     social: {
       twitter: `aweary`,
     },
