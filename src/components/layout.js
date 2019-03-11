@@ -9,6 +9,7 @@ const rootPath = `${__PATH_PREFIX__}/`
 
 function Layout({location, title, children}) {
   let header;
+  let footer = null;
   if (location.pathname === rootPath) {
     header = (
       <h1
@@ -51,6 +52,7 @@ function Layout({location, title, children}) {
         </Link>
       </h3>
     )
+    footer = <footer><Bio /></footer>;
   }
   return (
     <div
@@ -63,7 +65,7 @@ function Layout({location, title, children}) {
     >
       <header>{header}</header>
       <main>{children}</main>
-      <footer><Bio /></footer>
+      {footer}
     </div>
   )
 }
