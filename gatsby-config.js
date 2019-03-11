@@ -2,8 +2,8 @@ module.exports = {
   siteMetadata: {
     title: `react.run`,
     author: `Brandon Dail`,
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
+    description: `A blog about React and sometimes other things`,
+    siteUrl: `https://react.run/`,
     social: {
       twitter: `aweary`,
     },
@@ -74,6 +74,11 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
-    
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-136060223-1",
+      },
+    },
   ],
 }

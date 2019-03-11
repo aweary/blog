@@ -1,6 +1,6 @@
 ---
-path: "/error-driven-dev-react"
-date: "2017-07-12T17:12:33.962Z"
+path: "/fault-tolerance-react"
+date: "2019-03-11"
 title: "The Fault in Our Tolerance: Accounting for Failures in React"
 description: ""
 ---

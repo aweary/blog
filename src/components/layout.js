@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
+import Bio from "./bio";
 
 import { rhythm, scale } from "../utils/typography"
 
@@ -15,6 +16,7 @@ function Layout({location, title, children}) {
           ...scale(1.5),
           marginBottom: rhythm(1.5),
           marginTop: 0,
+          fontFamily: "'IBM Plex Mono', monospace",
         }}
       >
         <Link
@@ -33,7 +35,7 @@ function Layout({location, title, children}) {
     header = (
       <h3
         style={{
-          fontFamily: ` sans-serif`,
+          fontFamily: "'IBM Plex Mono', monospace",
           marginTop: 0,
         }}
       >
@@ -61,7 +63,7 @@ function Layout({location, title, children}) {
     >
       <header>{header}</header>
       <main>{children}</main>
-      <footer />
+      <footer><Bio /></footer>
     </div>
   )
 }
