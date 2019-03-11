@@ -23,7 +23,7 @@ body {
   color: var(--textNormal);
 }
 
- p {
+p {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -33,7 +33,11 @@ a {
   font-weight: 600;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   color: var(--header);
 }
 
@@ -87,6 +91,10 @@ blockquote {
   margin-bottom: 0;
 }
 
+.thought h4 {
+  margin-bottom: 0.5rem;
+}
+
 .blurb {
   background-color: #00ebe833;
   padding: 20px;
@@ -106,7 +114,6 @@ blockquote {
 .blurb p {
   margin-bottom: 0;
 }
-
 
 /**
  * Based on copypasta from Remy Bach and Sarah Drasner
