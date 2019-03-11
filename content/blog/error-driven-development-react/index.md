@@ -7,19 +7,17 @@ description: ""
 
 ## Fault Tolerance
 
-Building modern web apps is a complex process involving many moving parts. Sometimes these moving parts don't play well together, which means that they _stop_ moving so well and our things starts breaking.
+Building modern web apps is a complex process with a lot of moving parts. Sometimes these moving parts come to a halt and things start breaking.
 
 ![Funny error message](./error.svg)
 
-While we do what we can to prevent these bad things, the reality is that no application is ever going to be entirely error-free. That means we always need to build with the expectation that **things will break in unexpected ways**, and we need to be able to handle that gracefully.
+We do what we can to prevent this from happening, but the reality is that we'll never be _entirely_ error-free. That means we should always expect that **things will sometimes break in unexpected ways**, and we need to be able to handle that gracefully.
 
 In other words, we need [fault tolerance:](https://en.wikipedia.org/wiki/Fault_tolerance)
 
 > Fault tolerance is the property that enables a system to continue operating properly in the event of the failure of some (one or more faults within) of its components.
 
-In my experience fault tolerance is often overlooked and undervalued in web apps. We might have hundreds of tests that give us confidence that things _probably_ won't break, but we don't take the same time to consider what happens when some inevitable failure happens.
-
-For many of us [high availability](https://en.wikipedia.org/wiki/High_availability) is a top priority and fault tolerance is a critical property of a high availability system, so it makes sense to give it some careful though.
+In my experience fault tolerance is often overlooked and undervalued in web apps. We might have hundreds of tests that give us confidence that things _probably_ won't break, but we don't take the same time to consider what happens when some inevitable failure happens. This is especially important if [high availability](https://en.wikipedia.org/wiki/High_availability) is a priority (and it often is).
 
 So how do we enable our React application to be fault tolerant?
 
@@ -33,7 +31,7 @@ componentDidCatch(error) {
   // Hurray for fault detection!
 
   // We can now do things like call setState to render a fallback
-  // UI, so that our users know an error has occurred.
+  // UI so that our users know an error has occurred.
   this.setState({ error, showFallback: true });
 }
 ```
@@ -43,7 +41,7 @@ componentDidCatch(error) {
 
 <div>
 
-An error boundary in React is just a class component with the `componentDidCatch` method. If you want a more robust starting point, check out [react-error-boundary](https://github.com/bvaughn/react-error-boundary).
+An error boundary in React is just a class component with the `componentDidCatch` method. If you want a nice starting point check out [react-error-boundary](https://github.com/bvaughn/react-error-boundary).
 
 </div>
 </div>
@@ -52,9 +50,9 @@ The React docs do a great job of explaining what error boundaries are and how to
 
 ## Drawing the Right Fault Lines
 
-Adding an error boundary to your application is the easy part. It only takes a few lines of code. The tricky part is **finding the right places** to put them. As we'll see, you really want to follow [the Goldilocks principle](https://en.wikipedia.org/wiki/Goldilocks_principle) and implement "just the right amount" of error boundaries, but what is "just the right amount"?
+Adding an error boundary to your application is easy. It only takes a few lines of code. The tricky part is **finding the right places** to put them. As we'll see you usually want to follow [the Goldilocks principle](https://en.wikipedia.org/wiki/Goldilocks_principle) and implement "just the right amount" of error boundaries, but what _is_ "just the right amount"?
 
-First let's look at the two extremes so we can see why they're usually a bad idea.
+First let's look at the two extremes so we can see what their downsides are.
 
 ### Not Enough Error Boundaries
 
@@ -81,11 +79,11 @@ Going back to the definition of fault tolerance:
 
 > Fault tolerance is the property that enables a system to **continue operating** properly in the event of the failure
 
-We can see that a single error boundary doesn't really give us fault tolerance either since a single failure brings down the whole application.
+We can see that a single error boundary doesn't really give us fault tolerance either since **a single failure brings down the whole application**.
 
 ### Too Many Error Boundaries
 
-Moving to the other extreme, you could try and wrap _every_ component in an error boundary. The problems with this approach are more subtle, so let's look at an example to see why this is actually _worse_ than a single error boundary.
+Moving to the other extreme, you could try and wrap _every_ component in an error boundary. The problems with this approach are more subtle so let's look at a more detailed example to see why this can be _worse_ than a single error boundary.
 
 Imagine we have this `<CheckoutForm />` component that lets users see whats in their cart, enter their credit card info, and make their purchase.
 
@@ -129,9 +127,9 @@ In a real world example of this, each component would probably wrap its own expo
 </div>
 </div> -->
 
-At first blush this might seem like a fine idea; the more granular your error boundaries are the less impact a failure has on the application as a whole. Fault tolerance! The problem with this is that **minimizing the effect of an error isn't the same as being fault tolerant**.
+At first blush this might seem like a fine idea; the more granular your error boundaries are the less impact a single failure has on the application as a whole. That sounds like fault tolerance! The problem with this is that **minimizing the effect of an error isn't the same as being fault tolerant**.
 
-Let's pretend something in the `CreditCardInput` component broke.
+Pretend something in the `CreditCardInput` component broke.
 
 ```jsx{5-8}
 <form>
@@ -148,26 +146,21 @@ Let's pretend something in the `CreditCardInput` component broke.
 </form>
 ```
 
-Let's try and break down a couple of the problems this is going to cause, and why this is a world of hurt for users.
+If we break down what this would mean for the user experience (UX) we can see that this might put our users in a world of hurt.
 
 #### Half-Broken UI is Full-Broken UX
 
-Since `CreditCardInput` has its own error boundary the error won't propagate to the rest of the `CheckoutForm` component, but the `CheckoutForm` component isn't usable without `CreditCardInput` 🤔. The `CheckoutButton` and `CardDescription` components are still mounted so the user can still see the items and attempt to checkout, but what if they didn't finish entering their credit card info? If they _did_ enter the credit card before `CreditCardInput` crashed was that state retained?
+Since `CreditCardInput` has its own error boundary the error won't propagate to the rest of the `CheckoutForm` component, but the `CheckoutForm` component isn't usable without `CreditCardInput` 🤔. The `CheckoutButton` and `CardDescription` components are still mounted so the user can still see the items and attempt to checkout, but what if they didn't finish entering their credit card info? If they _did_ enter the credit card before `CreditCardInput` crashed was that state retained? What happens when they try to checkout?
 
-I'm betting even the author of these components wouldn't know what would happen in this case--let alone the user. This is likely to be really confusing and frustrating for them.
+I'm betting even the author of these components wouldn't know what would happen in this case--let alone the user. This is likely to be confusing and frustrating for them.
 
 #### Generic Error Boundary, Generic Fallback
 
 The degree to which this is frustrating and confusing also depends on _what you render as your fallback_. Does the component just pop off the screen without warning? That would be really confusing to almost everyone.
 
-If not, you're probably using a shared fallback UI. Maybe it renders a sad face with some helpful information about the error. This is better than nothing, but if you're wrapping _every component in this error boundary_ it means this fallback has to render correctly for _every possible UI element_. This is almost impossible to do right, since different elements have different layout requirements. A fallback that is good for a big, page-level section like a header is bad for a single small button, and vice-versa.
+If not, you're probably using a shared fallback UI. Maybe it renders a sad face with some helpful information about the error. This is better than nothing, but if you're wrapping _every component in this error boundary_ it means this fallback has to render correctly for _every possible UI element_. This is near impossible to do right, since different elements have different layout requirements. A fallback that is good for a page-level section like a header is bad for a small icon button, and vice-versa.
 
-<!-- Also, what is being rendered in the place of `CreditCardInput`? If it's nothing at all then the user is probably _extremely confused_ and frustrated since that provides no signal that something went wrong. If you're using the same error boundary component for _every_ component in your app then you're likely using a generic fallback UI, which will almost never look good in all cases.
- -->
-
-Hopefully now the problem(s) become apparent: **wrapping every component in an error boundary doesn't let you fail gracefully**. It can put your application into an inconsistent state that can frustrate and confuse users.
-
-Avoiding corrupted state is actually [one of the main reasons that error boundaries even exist in the first place](https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html#new-behavior-for-uncaught-errors):
+Hopefully the problem(s) are apparent: **wrapping every component in an error boundary can lead to a confusing and broken user experience**. It often puts your application into an inconsistent state that can frustrate and confuse users. It's interesting to note that avoiding "corrupted state" is actually [one of the main reasons that error boundaries even exist in the first place](https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html#new-behavior-for-uncaught-errors):
 
 > We debated this decision, but in our experience **it is worse to leave corrupted UI in place than to completely remove it**
 
@@ -177,7 +170,7 @@ Avoiding corrupted state is actually [one of the main reasons that error boundar
 
 #### Performance Penalty
 
-Error boundaries also come with some inherent overhead, so overusing them can negatively hurt the performance of your application. This should only be a problem if you use them _everywhere_, so don't let this scare you away from using them all together.</div>
+Error boundaries also come with some inherent overhead, so overusing them can negatively affect performance. This should only be a problem if you use them _everywhere_, so don't let this scare you away from using them all together.</div>
 
 </div>
 
@@ -191,7 +184,7 @@ There's no single number that we can point to and say "that is the right amount"
 
 There is no universal definition of a "feature" that we can use to look at arbitrary apps and identify their boundaries. [I know it when I see it](https://en.wikipedia.org/wiki/I_know_it_when_I_see_it) is usually the best we can do, but there are some common patterns that you can use as guidelines.
 
-Most applications are made up of individual sections that get composed together. A header, navigation, main content, sidebars, footers, etc. Each of them contribute to the user experience as a whole, but they have a certain level of independence.
+Most applications are made up of individual sections that get composed together. A header, navigation, main content, sidebars, footers, etc. Each of them contribute to the user experience as a whole, but they retain a certain level of independence.
 
 Let's look at [Twitter](http://twitter.com) as an example:
 
@@ -203,7 +196,7 @@ If a component in one of these sections throws it seems fair to say that the oth
 
 ### A Recursive Line of Questioning
 
-UIs are often [recursive](<https://en.wikipedia.org/wiki/Recursion_(computer_science)>). At the page-level you have these big sections like sidebars and timelines, but then inside those sections you also have _sub-sections_ like headers and lists--and so on.
+UIs are often [recursive](<https://en.wikipedia.org/wiki/Recursion_(computer_science)>). At the page-level you have these big sections like sidebars and timelines, but then inside those sections you also have _sub-sections_ like headers and lists, which contain other sections, and so on.
 
 When identifying the right place for error boundaries a good question to ask yourself is **"how should an error in this component affect its siblings?"**. In the `<CheckoutForm />` example this is exactly the question we considered: if `CreditCardInput` failed, how should that affect `CheckoutButton` and `CardDescription`?
 
@@ -213,19 +206,28 @@ By recursively applying this line of questioning to your component tree you can 
 
 Let's use Twitter as an example again, to see how this would work. We'll start at the top and then drill down into the follower recommendation section.
 
-
 <div class="blurb">
 <div class="emoji">☝️</div>
 <div>
-This analysis contains no small part of personal opinion and bias based on my experience and perception of these features work and how _I'd expect them_ to work. It's by no means meant to be the "correct" answer, we just want to get a feel for the process itself.
+
+This analysis contains no small part opinion and bias based on my perception of these features work and how _I'd expect them_ to work. It's not meant to be the "correct" answer, we just want to get a feel for the process itself.
+
 </div>
 </div>
 
 ![A screenshot of Twitter with the timeline and follower recommendation sections highlighted](./twitter-section-1.png)
 
-Let's drill into the **Who to follow** section.
+Starting at the top we can identify three main content sections: **Home**, **Trends for you**, and **Who to follow**. Let's drill into the **Who to follow** section.
 
-So we want to consider how an error in the **Who to follow** section should affect its siblings, so lets ask ourselves: **if the _Who to Follow_ section crashed, should the _Home_ and _Trends_ sections also crash?**. I think this is a clear case where they _shouldn't_. The other sections don't seem to rely on each other, so this is a great place to put an error boundary.
+We start by asking ourselves:
+
+> How should an error in this component affect its siblings?
+
+We can make this question a little more concrete by rephrasing it as:
+
+> If this component was to crash, should it's siblings also crash?
+
+So when considering **Who to follow** we ask: **if the _Who to Follow_ section crashed, should the _Home_ and _Trends_ sections also crash?**. I think this is a clear case where they _shouldn't_. The other sections don't seem to rely on each other, so this is a great place to put an error boundary.
 
 #### Twitter Deep Dive: Who To Follow
 
@@ -285,7 +287,7 @@ So this is all mostly a long winded way of saying you should:
 - **Identify the feature boundaries in your app and put your error boundaries there**. Since React apps are structured as trees, a good approach is to start at the top and work your way down.
 
 
-- **Recursively ask yourself "if this component failed, how should that affect its siblings?"**. It's a good heuristic for finding those feature boundaries.
+- **Recursively ask yourself "if this component crashes, should its siblings also crash?"**. It's a good heuristic for finding those feature boundaries.
 
 - **Intentionally design your app for error states**. When you put error boundaries at feature boundaries it's much easier to create custom fallback UIs that look good and let the user know that something has gone wrong. You could even implement feature-specific retry logic so that users can refresh that section without refreshing the whole page.
 
