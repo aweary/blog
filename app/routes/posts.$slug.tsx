@@ -1,12 +1,7 @@
 import { Loader, LinksFunction, json } from "@remix-run/data";
 import { useRouteData } from "@remix-run/react";
 import * as Remark from "../remark.server";
-import { Octokit } from "@octokit/rest";
-import fs from "fs/promises";
-
-const octokit = new Octokit({
-  auth: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
-});
+import { octokit } from "../github.server";
 
 export let links: LinksFunction = () => {
   return [
@@ -26,9 +21,8 @@ export function headers({ loaderHeaders }: { loaderHeaders: Headers }) {
 export const loader: Loader = async ({ params }) => {
   let content = "";
   if (process.env.NODE_ENV === "development") {
-    content = (await fs.readFile(`content/${params.slug}.md`)).toString(
-      "utf-8"
-    );
+    const fs = require("fs");
+    content = fs.readFileSync(`content/${params.slug}.md`).toString("utf-8");
   } else {
     const {
       // @ts-ignore

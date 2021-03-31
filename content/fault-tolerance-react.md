@@ -58,7 +58,7 @@ First let's look at the two extremes so we can see what their downsides are.
 
 The first extreme: a single error boundary, right at the top of your application.
 
-```js{6-8}
+```js
 // ⚠️ I'll use react-error-boundary in these examples
 import ErrorBoundary from "react-error-boundary"
 import App from "./App.js"
@@ -131,7 +131,7 @@ At first blush this might seem like a fine idea; the more granular your error bo
 
 Pretend something in the `CreditCardInput` component broke.
 
-```jsx{5-8}
+```jsx
 <form>
   <ErrorBoundary>
     <CartDescription items={props.items} />
@@ -251,7 +251,7 @@ In this case I feel like the answer is yes! If the user's name and handle were g
 
 Now that we know a little more about using error boundaries and fault tolerance, I want to share one of my favorite parts about this whole thing: how you can testing this all out. The best, low-effort way I've found to test your application's fault tolerance is to **just go in and manually break things**.
 
-```jsx{2-3}
+```jsx
 function CreditCardInput(props) {
   // What happens if I messed up here? Let's find out!
   throw new Error("oops, I made a mistake!")
