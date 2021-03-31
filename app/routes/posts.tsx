@@ -1,16 +1,16 @@
 import { HeadersFunction, Link, useRouteData } from "@remix-run/react";
-import { Loader } from "@remix-run/data";
+import { Loader, json } from "@remix-run/data";
 import { Octokit } from "@octokit/rest";
 import * as Remark from "../remark.server";
 import fs from "fs/promises";
 
 const octokit = new Octokit();
 
-export const headers: HeadersFunction = async () => {
+export function headers({ loaderHeaders }: { loaderHeaders: Headers }) {
   return {
-    "Cache-Control": "max-age=60, stale-while-revalidate=360",
+    "Cache-Control": loaderHeaders.get("Cache-Control"),
   };
-};
+}
 
 export const loader: Loader = async () => {
   const response = await octokit.repos.getContent({
@@ -32,8 +32,11 @@ export const loader: Loader = async () => {
       return { ...markdown.data, url: `/posts/${name.split(".md")[0]}` };
     })
   );
-  console.log(data);
-  return data;
+  return json(data, {
+    headers: {
+      "Cache-Control": "s-maxage=60, stale-while-revalidate=604800",
+    },
+  });
 };
 
 export default function Posts() {

@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 nav {
   display: flex;
   gap: 1em;
@@ -28,6 +32,10 @@ body {
   background-color: #fefefe;
 }
 
+pre, code {
+  overflow-x: scroll;
+}
+
 html,
 body {
   height: 100%;
@@ -41,6 +49,9 @@ body {
 main,
 nav {
   padding: 1em;
+  word-break: break-word;
+  word-wrap: break-word;
+  max-width: 95vw;
 }
 
 main h1:first-child {

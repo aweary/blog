@@ -8,11 +8,11 @@ const octokit = new Octokit({
   auth: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
 });
 
-export const headers: HeadersFunction = async ({ loaderHeaders }) => {
+export function headers({ loaderHeaders }: { loaderHeaders: Headers }) {
   return {
     "Cache-Control": loaderHeaders.get("Cache-Control"),
   };
-};
+}
 
 export const loader: Loader = async ({ params }) => {
   let content = "";
@@ -34,7 +34,7 @@ export const loader: Loader = async ({ params }) => {
   const markdown = await Remark.compile(content);
   return json(markdown, {
     headers: {
-      "Cache-Control": "no-cache",
+      "Cache-Control": "s-maxage=60, stale-while-revalidate=604800",
     },
   });
 };
