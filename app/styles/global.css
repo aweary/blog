@@ -2,15 +2,18 @@
   box-sizing: border-box;
 }
 
-nav {
-  display: flex;
-  gap: 1em;
-}
-
 body {
   font-size: 24px;
   padding: 0.5em;
   font-family: "europa";
+}
+
+blockquote {
+  font-style: italic;
+  padding: 5px;
+  margin-left: 0;
+  padding-left: 5%;
+  opacity: 0.85;
 }
 
 .heading-link {
@@ -32,7 +35,12 @@ body {
   background-color: #fefefe;
 }
 
-pre, code {
+img {
+  width: 100%;
+}
+
+pre,
+code {
   overflow-x: scroll;
 }
 
@@ -49,9 +57,22 @@ body {
 main,
 nav {
   padding: 1em;
+
+  max-width: 95vw;
+}
+
+main {
   word-break: break-word;
   word-wrap: break-word;
-  max-width: 95vw;
+}
+
+pre,
+code {
+  border-radius: 1em;
+}
+
+nav a {
+  margin-right: 2em;
 }
 
 main h1:first-child {
@@ -95,6 +116,51 @@ nav a::after {
   z-index: -1;
 }
 
+.blurb {
+  background-color: #00ebe833;
+  padding: 20px;
+  border: 1px solid #2fe8e8;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blurb .emoji {
+  font-size: 30px;
+  padding-right: 15px;
+}
+
+.blurb p {
+  margin-bottom: 0;
+}
+
+.thought {
+  background-color: lightyellow;
+  padding: 20px;
+  border: 1px solid orange;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.thought .emoji {
+  font-size: 30px;
+  padding-right: 15px;
+}
+
+.thought p {
+  margin-bottom: 0;
+}
+
+.thought h4 {
+  margin-bottom: 0.5rem;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background: #020b19;
@@ -111,5 +177,10 @@ nav a::after {
   .heading-link:focus-visible {
     outline: none;
     background-color: #3e00ad;
+  }
+
+  .thought {
+    color: black;
+    background-color: darksalmon;
   }
 }

@@ -1,4 +1,4 @@
-import { Loader, HeadersFunction, json } from "@remix-run/data";
+import { Loader, LinksFunction, json } from "@remix-run/data";
 import { useRouteData } from "@remix-run/react";
 import * as Remark from "../remark.server";
 import { Octokit } from "@octokit/rest";
@@ -7,6 +7,15 @@ import fs from "fs/promises";
 const octokit = new Octokit({
   auth: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
 });
+
+export let links: LinksFunction = () => {
+  return [
+    {
+      rel: "stylesheet",
+      href: "https://unpkg.com/prism-theme-night-owl@1.4.0/build/style.css",
+    },
+  ];
+};
 
 export function headers({ loaderHeaders }: { loaderHeaders: Headers }) {
   return {

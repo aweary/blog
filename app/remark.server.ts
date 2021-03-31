@@ -7,6 +7,8 @@ import slug from "remark-slug";
 import frontmatter from "remark-frontmatter";
 import extract from "remark-extract-frontmatter";
 import { parse as parseYAML } from "yaml";
+// @ts-ignore
+import prism from "remark-prism";
 // import toVfile from 'to-vfile'
 
 interface ParsedMarkdown {
@@ -27,6 +29,7 @@ export async function compile(input: string): Promise<ParsedMarkdown> {
         class: "heading-link",
       },
     })
+    .use(prism)
     .use(html)
     .process(input);
   return content as ParsedMarkdown;

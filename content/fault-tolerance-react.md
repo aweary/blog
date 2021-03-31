@@ -9,7 +9,7 @@ description: ""
 
 Building modern web apps is a complex process with a lot of moving parts. Sometimes these moving parts come to a halt and things start breaking.
 
-![Funny error message](./error.svg)
+![Funny error message](/error.svg)
 
 We do what we can to prevent this from happening, but the reality is that we'll never be _entirely_ error-free. That means we should always expect that **things will sometimes break in unexpected ways**, and we need to be able to handle that gracefully.
 
@@ -188,7 +188,7 @@ Most applications are made up of individual sections that get composed together.
 
 Let's look at [Twitter](http://twitter.com) as an example:
 
-![A screenshot of twitter.com, logged in](./twitter.png)
+![A screenshot of twitter.com, logged in](/twitter.png)
 
 It's immediately clear that there are distinct sections and features on the page. The main timeline for tweets, the follower recommendations, the trends section, and the navigation bar. The layout and styling of these sections even indicate there's a division between the sections which is a really good starting point: **sections that are visually independent are likely independent features** which are exactly where you want your error boundaries.
 
@@ -215,7 +215,7 @@ This analysis contains no small part opinion and bias based on my perception of 
 </div>
 </div>
 
-![A screenshot of Twitter with the timeline and follower recommendation sections highlighted](./twitter-section-1.png)
+![A screenshot of Twitter with the timeline and follower recommendation sections highlighted](/twitter-section-1.png)
 
 Starting at the top we can identify three main content sections: **Home**, **Trends for you**, and **Who to follow**. Let's drill into the **Who to follow** section.
 
@@ -233,7 +233,7 @@ So when considering **Who to follow** we ask: **if the _Who to Follow_ section c
 
 Now we apply this same line of questioning to the **Who to Follow** section as well.
 
-![A screenshot of Twitter's "Who to Follow" section, with different subsections highlighted](./twitter-section-2.png)
+![A screenshot of Twitter's "Who to Follow" section, with different subsections highlighted](/twitter-section-2.png)
 
 With the focus on _Who to Follow_ we see three obvious sections: The title, the list of users to follow, and the show more button. Drilling into the list of users we again ask ourselves the same question: **if the list of followers was to crash, should the title and "show more" button also crash?**. In this case it's a little less obvious but I think they probably shouldn't. Keeping the title around doesn't really hurt anything and the "Show more" button links to another page which itself might be working. So the answer again yes, let's add another error boundary!
 
@@ -241,7 +241,7 @@ With the focus on _Who to Follow_ we see three obvious sections: The title, the 
 
 Let's do it one more time, looking at of the follower recommendations:
 
-![A screenshot of one of the followers in the "Who to follow" section of Twitter](./twitter-section-3.png)
+![A screenshot of one of the followers in the "Who to follow" section of Twitter](/twitter-section-3.png)
 
 There are only two sections here so we can just ask: **if the user's name and handle were to crash, should the Follow button also crash and vice-versa?**
 
