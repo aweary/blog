@@ -1,0 +1,41 @@
+module.exports = {
+    mode: "jit",
+    purge: ["./app/**/*.ts", "./app/**/*.tsx"],
+    darkMode: "media",
+    theme: {
+      fontFamily: {
+        sans: ["ui-sans-serif", "system-ui"],
+        serif: ["Source Serif Pro","ui-serif", "Georgia"],
+        mono: [
+          "ui-monospace",
+          "Menlo",
+          "Monaco",
+          "Cascadia Mono",
+          "Segoe UI Mono",
+          "Roboto Mono",
+          "Oxygen Mono",
+          "Ubuntu Monospace",
+          "Source Code Pro",
+          "Fira Mono",
+          "Droid Sans Mono",
+          "Courier New",
+          "monospace",
+        ],
+        display: ["Oswald"],
+        body: [
+          "Source Sans Pro",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica",
+          "Arial",
+          "sans-serif",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+        ],
+      },
+    },
+  };
+  

@@ -1,0 +1,31 @@
+<h1>Remix Starter for Vercel</h1>
+<p>Welcome to Remix!</p>
+<p>This is a starter repo for using <a href="https://remix.run">Remix</a> with <a href="http://vercel.com/">Vercel</a>.</p>
+<h2>Development</h2>
+<p>After cloning the repo, rename <code>.npmrc.example</code> to <code>.npmrc</code> and insert the license key you get from <a href="https://remix.run">logging in to your dashboard at remix.run</a>.</p>
+<blockquote>
+<p>Note: if this is a public repo, you'll probably want to move the line with your key into <code>~/.npmrc</code> to keep it private.</p>
+</blockquote>
+<p>Then, install all dependencies using <code>npm</code>:</p>
+<pre><code class="language-sh">$ npm install
+</code></pre>
+<p>Your <code>@remix-run/*</code> dependencies will come from the Remix package registry.</p>
+<h3>First Run</h3>
+<p>Before you can run the app in development you need link the project to a new vercel project on your account.</p>
+<pre><code class="language-sh">$ vercel link
+</code></pre>
+<p>Follow the prompts, and when its done you should be able to get started:</p>
+<pre><code class="language-sh">$ npm start
+</code></pre>
+<p>This will start the Remix's build watcher and the vercel development server.</p>
+<h2>Deploying to Production</h2>
+<p>You will need to add your npmrc with your Remix token inside it to your environments:</p>
+<pre><code class="language-bash">$ vercel env add plain NPM_RC development &lt; .npmrc
+$ vercel env add plain NPM_RC preview &lt; .npmrc
+$ vercel env add plain NPM_RC production &lt; .npmrc
+</code></pre>
+<p>Once that's done you can deploy!</p>
+<pre><code class="language-sh">$ vercel
+</code></pre>
+<h2>Documentation</h2>
+<p>Detailed documentation for Remix <a href="https://remix.run/dashboard/docs">is available at remix.run</a>.</p>

@@ -1,0 +1,104 @@
+nav {
+  display: flex;
+  gap: 1em;
+}
+
+body {
+  font-size: 24px;
+  padding: 0.5em;
+  font-family: "europa";
+}
+
+.heading-link {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bolder;
+}
+
+.heading-link:focus-visible {
+  outline: none;
+  background-color: yellow;
+}
+
+body {
+  font-size: 20px;
+  max-width: 850px;
+  margin: auto;
+  color: #020b19;
+  background-color: #fefefe;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+main,
+nav {
+  padding: 1em;
+}
+
+main h1:first-child {
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+p {
+  font-size: 1em;
+}
+
+nav {
+  display: flex;
+  gap: 1.5em;
+}
+
+nav a {
+  text-decoration: none;
+  position: relative;
+  color: inherit;
+}
+
+a {
+  color: #2620ff;
+  font-weight: bold;
+}
+
+nav a::after {
+  display: block;
+  content: "";
+  position: absolute;
+  background-color: yellow;
+  width: 120%;
+  height: 10px;
+  display: absolute;
+  top: 15px;
+  left: -5px;
+  z-index: -1;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #020b19;
+    color: white;
+  }
+
+  nav a::after {
+    background-color: #3e00ad;
+  }
+
+  a {
+    color: #4cd3ff;
+  }
+  .heading-link:focus-visible {
+    outline: none;
+    background-color: #3e00ad;
+  }
+}
