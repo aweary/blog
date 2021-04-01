@@ -176,6 +176,37 @@ nav a::after {
   margin-bottom: 0.5rem;
 }
 
+.posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1em;
+  padding-left: 0;
+}
+
+.posts li {
+  list-style: none;
+  background-color: ivory;
+  border-radius: 2em;
+  padding: 1em;
+  height: 250px;
+}
+
+.posts li:focus-visible {
+  outline: 4px solid yellow;
+}
+
+.posts li a {
+  text-decoration: none;
+  outline: none;
+  color: inherit;
+  display: grid;
+}
+
+.posts li a span {
+  font-weight: 500;
+  padding-top: 1em;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background: #020b19;
@@ -196,5 +227,9 @@ nav a::after {
 
   .thought {
     background-color: #3c3605;
+  }
+
+  .posts li {
+    background-color: #120727;
   }
 }

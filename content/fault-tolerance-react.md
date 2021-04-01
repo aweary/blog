@@ -1,8 +1,7 @@
 ---
-path: "/fault-tolerance-react"
-date: "2019-03-11"
 title: "The Fault in Our Tolerance: Accounting for Failures in React"
-description: ""
+description: "Best practices for using error boundaries in React"
+date: "2019-03-11"
 ---
 
 ## Fault Tolerance
@@ -60,15 +59,15 @@ The first extreme: a single error boundary, right at the top of your application
 
 ```js
 // ⚠️ I'll use react-error-boundary in these examples
-import ErrorBoundary from "react-error-boundary"
-import App from "./App.js"
+import ErrorBoundary from "react-error-boundary";
+import App from "./App.js";
 
 ReactDOM.render(
   <ErrorBoundary>
     <App />
   </ErrorBoundary>,
   document.getElementById("root")
-)
+);
 ```
 
 This is probably close to what most people do. It's essentially the same thing that happens when server-rendered applications fail. It's not a _terrible_ experience either, it's just not the best we can do. The problem is that **when one thing fails, everything else fails with it.**
@@ -254,8 +253,8 @@ Now that we know a little more about using error boundaries and fault tolerance,
 ```jsx
 function CreditCardInput(props) {
   // What happens if I messed up here? Let's find out!
-  throw new Error("oops, I made a mistake!")
-  return <input className="credit-card" />
+  throw new Error("oops, I made a mistake!");
+  return <input className="credit-card" />;
 }
 ```
 

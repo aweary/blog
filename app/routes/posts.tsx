@@ -41,11 +41,14 @@ export const loader: Loader = async () => {
 export default function Posts() {
   const data = useRouteData();
   return (
-    <ul>
+    <ul className="posts">
       {data.map((item) => {
         return (
           <li key={item.url}>
-            <Link to={item.url}>{item.title}</Link>
+            <Link to={item.url}>
+              <h2>{item.title}</h2>
+              <span>{item.description}</span>
+            </Link>
           </li>
         );
       })}

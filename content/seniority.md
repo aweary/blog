@@ -1,5 +1,6 @@
 ---
-title: "Seniority: a Spectrum"
+title: "Seniority is a Spectrum"
+description: "Why 'Senior Engineer' is a broad role and we have so much trouble talking about it."
 date: "03/31/2021"
 tags: [engineering]
 ---
