@@ -25,7 +25,6 @@ interface ParsedMarkdown {
 
 export async function compile(input: string): Promise<ParsedMarkdown> {
   const content = await unified()
-    .use(markdown)
     // @ts-ignore
     .use(frontmatter, ["yaml", "toml"])
     .use(extract, { yaml: parseYAML })
@@ -37,9 +36,10 @@ export async function compile(input: string): Promise<ParsedMarkdown> {
         class: "heading-link",
       },
     })
-    .use(remark2rehype)
+    .use(markdown)
+    .use(remark2rehype, { allowDangerousHtml: true })
     .use(highlight)
-    .use(html)
+    .use(html, { allowDangerousHtml: true })
     .process(input);
   return content as ParsedMarkdown;
 }

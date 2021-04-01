@@ -42,6 +42,7 @@ img {
 pre,
 code {
   overflow-x: scroll;
+  font-size: 0.9em;
 }
 
 html,
@@ -79,8 +80,22 @@ main h1:first-child {
   margin-top: 0;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+}
+
 h1 {
   font-size: 2em;
+  margin-bottom: 0.25em;
+}
+
+.subtitle {
+  opacity: 0.8;
+  font-size: 1em;
 }
 
 p {
@@ -180,7 +195,6 @@ nav a::after {
   }
 
   .thought {
-    color: black;
-    background-color: darksalmon;
+    background-color: #3c3605;
   }
 }

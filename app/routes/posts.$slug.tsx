@@ -1,15 +1,28 @@
-import { Loader, LinksFunction, json } from "@remix-run/data";
+import { Loader, LinksFunction, MetaFunction, json } from "@remix-run/data";
 import { useRouteData } from "@remix-run/react";
 import * as Remark from "../remark.server";
 import { octokit } from "../github.server";
+import { format } from "date-fns";
 
 export let links: LinksFunction = () => {
   return [
     {
       rel: "stylesheet",
-      href: "https://unpkg.com/prism-theme-night-owl@1.4.0/build/style.css",
+      href: "https://unpkg.com/highlight.js@10.7.1/styles/a11y-dark.css",
+      media: "(prefers-color-scheme: dark)",
+    },
+    {
+      rel: "stylesheet",
+      href: "https://unpkg.com/highlight.js@10.7.1/styles/a11y-light.css",
+      media: "(prefers-color-scheme: light)",
     },
   ];
+};
+
+export const meta: MetaFunction = ({ data }) => {
+  return {
+    title: data.data.title,
+  };
 };
 
 export function headers({ loaderHeaders }: { loaderHeaders: Headers }) {
@@ -44,10 +57,21 @@ export const loader: Loader = async ({ params }) => {
 
 export default function SlugRoute() {
   const data = useRouteData();
+  const date = new Date(data.data.date);
   return (
     <div>
       <h1>{data.data.title}</h1>
+      <h2 className="subtitle">{format(date, "LLLL do, yyyy")}</h2>
       <span dangerouslySetInnerHTML={{ __html: data.contents }} />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+          document.querySelectorAll('code').forEach(node => {
+            node.tabIndex = 0;
+          })
+        `,
+        }}
+      />
     </div>
   );
 }

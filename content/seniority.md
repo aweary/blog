@@ -1,5 +1,6 @@
 ---
 title: "Seniority: a Spectrum"
+date: "03/31/2021"
 tags: [engineering]
 ---
 

@@ -30,7 +30,11 @@ export default function App() {
         <nav>
           <Link to="/">Home</Link>
           <Link to="/posts">Posts</Link>
-          <a href="https://www.twitter.com/aweary" target="_blank">
+          <a
+            href="https://www.twitter.com/aweary"
+            target="_blank"
+            aria-label="Brandon Dail's Twitter"
+          >
             Twitter
           </a>
         </nav>
