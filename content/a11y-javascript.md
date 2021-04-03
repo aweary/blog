@@ -1,5 +1,6 @@
 ---
 title: JavaScript is Essential to Accessibility
+date: "04/03/2021"
 ---
 
 The idea that JavaScript is inherently _bad_ for accessibility has gotten more popular as client-side frameworks and SPAs continue gaining more market share with web appliations.
