@@ -5,7 +5,7 @@ date: "04/03/2021"
 
 The idea that JavaScript is inherently _bad_ for accessibility has gotten more popular as client-side frameworks and SPAs continue gaining more market share with web appliations.
 
-## No ~~ARIA~~ JavaScript is Better Than Bad ~~ARIA~~ JavaScript
+## No ~ARIA~ JavaScript is Better Than Bad ~ARIA~ JavaScript
 As a prelude I recommend reading through [No ARIA is better than Bad ARIA](https://www.w3.org/TR/wai-aria-practices-1.1/#no_aria_better_bad_aria) section of the [WAI-ARIA Authoring Practices](https://www.w3.org/TR/wai-aria-practices-1.1/) document. Part of the idea is that ARIA HTML attributes can easily be misused and cause even more problems and the **same is true for JavaScript**. Just like HTML, JavaScript is a tool that can be misused but that doesn't mean it's inherently a _bad_ tool for the job.
 
 ## JavaScript is Critical for Accessibile Widgets

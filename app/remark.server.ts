@@ -17,6 +17,7 @@ import remark2rehype from "remark-rehype";
 // @ts-ignore
 import highlight from "rehype-highlight";
 import html from "rehype-stringify";
+import gfm from "remark-gfm";
 
 interface ParsedMarkdown {
   contents: string;
@@ -37,6 +38,7 @@ export async function compile(input: string): Promise<ParsedMarkdown> {
       },
     })
     .use(markdown)
+    .use(gfm)
     .use(remark2rehype, { allowDangerousHtml: true })
     .use(highlight)
     .use(html, { allowDangerousHtml: true })

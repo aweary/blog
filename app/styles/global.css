@@ -188,7 +188,6 @@ nav a::after {
   background-color: ivory;
   border-radius: 2em;
   padding: 1em;
-  height: 250px;
 }
 
 .posts li:focus-visible {
