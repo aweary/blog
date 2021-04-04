@@ -1,11 +1,11 @@
 ---
-title: "Seniority is a Spectrum"
+title: "Thoughts on Seniority"
 description: "Why 'Senior Engineer' is a broad role and we have so much trouble talking about it."
 date: "03/31/2021"
 tags: [engineering]
 ---
 
-The engineering community has a lot of trouble talking about seniority and what we consider the _qualifications_ for becoming a senior engineer.
+The engineering community has a lot of trouble talking about seniority and what we consider the _qualifications_ for becoming a Senior Engineer.
 
 It's not uncommon to see folks scoff at the idea that people with under a decade of experience (or some other arbitrary threshold) can really be Senior Engineers™️; after all, how is it logical that two people with a potential 20+ year experience gap have the same title? Lets talk about it.
 

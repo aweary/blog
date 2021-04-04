@@ -18,7 +18,7 @@ export const loader: Loader = async () => {
     repo: "blog",
     path: `content`,
   });
-  const data = await Promise.all(
+  let data = await Promise.all(
     response.data.map(async ({ download_url, name }) => {
       if (process.env.NODE_ENV === "development") {
         const fs = require("fs");
@@ -31,6 +31,7 @@ export const loader: Loader = async () => {
       return { ...markdown.data, url: `/posts/${name.split(".md")[0]}` };
     })
   );
+  data = data.filter((post) => post.date != null);
   return json(data, {
     headers: {
       "Cache-Control": "s-maxage=60, stale-while-revalidate=604800",

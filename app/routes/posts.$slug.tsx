@@ -22,6 +22,7 @@ export let links: LinksFunction = () => {
 export const meta: MetaFunction = ({ data }) => {
   return {
     title: data.data.title,
+    description: data.data.description,
   };
 };
 
@@ -57,11 +58,13 @@ export const loader: Loader = async ({ params }) => {
 
 export default function SlugRoute() {
   const data = useRouteData();
-  const date = new Date(data.data.date);
+  const date = data.data.date
+    ? format(new Date(data.data.date), "LLLL do, yyyy")
+    : "(Draft)";
   return (
     <div>
       <h1>{data.data.title}</h1>
-      <h2 className="subtitle">{format(date, "LLLL do, yyyy")}</h2>
+      <h2 className="subtitle">{date}</h2>
       <span dangerouslySetInnerHTML={{ __html: data.contents }} />
       <script
         dangerouslySetInnerHTML={{
